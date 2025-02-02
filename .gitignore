@@ -1,2 +1,4 @@
 /.venv/
 /config.py
+/session_check.session
+/session_main.session
