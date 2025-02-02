@@ -125,7 +125,7 @@ async def main():
                             print(f"{button.text}")
                             if "₴" in button.text:
                                 # Використовуємо регулярний вираз для оголшення де є покупка
-                                match = re.search(r"Продажа.*₴", button.text)
+                                match = re.search(r"Покупка.*₴", button.text)
                                 if match:
                                     await button.click()
                                     found = True
