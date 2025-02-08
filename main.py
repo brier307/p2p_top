@@ -48,7 +48,7 @@ async def update_price_uah(client_main, new_price_uah):
                 for button in row:
                     if "Объявления" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     # Читання та вибір необхідного оголошення
@@ -59,38 +59,45 @@ async def update_price_uah(client_main, new_price_uah):
                 if found:
                     break
                 for button in row:
-                    print(f"{button.text}")
+                    # print(f"{button.text}")
                     if "₴" in button.text:
-                        match = re.search(r"Покупка.*USDT.*₴", button.text)
+                        match = re.search(r"Продажа.*USDT.*₴", button.text)
                         if match:
                             await button.click()
                             found = True
-                            print(f"Натиснуто кнопку: {button.text}")
+                            # print(f"Натиснуто кнопку: {button.text}")
                             break
 
-    # Натискаємо "Цена"
-    async for message in client_main.iter_messages('CryptoBot', limit=1):
-        if message.buttons:
-            for row in message.buttons:
-                for button in row:
-                    if "Цена" in button.text:
-                        await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
-                        await asyncio.sleep(0.5)
+            # Если кнопка "Покупка" найдена, меняем цену и отправляем её
+            if found:
+                # Натискаємо "Цена"
+                async for message in client_main.iter_messages('CryptoBot', limit=1):
+                    if message.buttons:
+                        for row in message.buttons:
+                            for button in row:
+                                if "Цена" in button.text:
+                                    await button.click()
+                                    # print(f"Натиснуто кнопку: {button.text}")
+                                    await asyncio.sleep(0.5)
 
-    new_price_uah = round(new_price_uah, 2)
-    await client_main.send_message('CryptoBot', str(new_price_uah))
-    print("Виставлено ціну:", new_price_uah)
-    await asyncio.sleep(0.5)
+                # Изменяем цену
+                new_price_uah = round(new_price_uah, 2)
+                await client_main.send_message('CryptoBot', str(new_price_uah))
+                print("Змінено ціну UAH ✅:", new_price_uah)
+                await asyncio.sleep(0.5)
 
-    async for message in client_main.iter_messages('CryptoBot', limit=1):
-        if message.buttons:
-            for row in message.buttons:
-                for button in row:
-                    if "Сохранить изменения" in button.text:
-                        await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
-                        await asyncio.sleep(0.5)
+                # Нажимаем "Сохранить изменения" только после того, как новая цена будет отправлена
+                async for message in client_main.iter_messages('CryptoBot', limit=1):
+                    if message.buttons:
+                        for row in message.buttons:
+                            for button in row:
+                                if "Сохранить изменения" in button.text:
+                                    await button.click()
+                                    # print(f"Натиснуто кнопку: {button.text}")
+                                    await asyncio.sleep(0.5)
+            else:
+                # Если кнопка не найдена, выводим сообщение
+                print("Не знайдено потрібне оголошення")
 
 
 async def update_price_kzt(client_main, new_price_kzt):
@@ -105,7 +112,7 @@ async def update_price_kzt(client_main, new_price_kzt):
                 for button in row:
                     if "Объявления" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     # Читання та вибір необхідного оголошення
@@ -116,38 +123,45 @@ async def update_price_kzt(client_main, new_price_kzt):
                 if found:
                     break
                 for button in row:
-                    print(f"{button.text}")
+                    # print(f"{button.text}")
                     if "₸" in button.text:
-                        match = re.search(r"Покупка.*USDT.*₸", button.text)
+                        match = re.search(r"Продажа.*USDT.*₸", button.text)
                         if match:
                             await button.click()
                             found = True
-                            print(f"Натиснуто кнопку: {button.text}")
+                            # print(f"Натиснуто кнопку: {button.text}")
                             break
 
-    # Натискаємо "Цена"
-    async for message in client_main.iter_messages('CryptoBot', limit=1):
-        if message.buttons:
-            for row in message.buttons:
-                for button in row:
-                    if "Цена" in button.text:
-                        await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
-                        await asyncio.sleep(0.5)
+            # Если кнопка "Покупка" найдена, меняем цену и отправляем её
+            if found:
+                # Натискаємо "Цена"
+                async for message in client_main.iter_messages('CryptoBot', limit=1):
+                    if message.buttons:
+                        for row in message.buttons:
+                            for button in row:
+                                if "Цена" in button.text:
+                                    await button.click()
+                                    # print(f"Натиснуто кнопку: {button.text}")
+                                    await asyncio.sleep(0.5)
 
-    new_price_kzt = round(new_price_kzt, 2)
-    await client_main.send_message('CryptoBot', str(new_price_kzt))
-    print("Виставлено ціну:", new_price_kzt)
-    await asyncio.sleep(0.5)
+                # Изменяем цену
+                new_price_kzt = round(new_price_kzt, 2)
+                await client_main.send_message('CryptoBot', str(new_price_kzt))
+                print("Змінено ціну KZT✅:", new_price_kzt)
+                await asyncio.sleep(0.5)
 
-    async for message in client_main.iter_messages('CryptoBot', limit=1):
-        if message.buttons:
-            for row in message.buttons:
-                for button in row:
-                    if "Сохранить изменения" in button.text:
-                        await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
-                        await asyncio.sleep(0.5)
+                # Нажимаем "Сохранить изменения" только после того, как новая цена будет отправлена
+                async for message in client_main.iter_messages('CryptoBot', limit=1):
+                    if message.buttons:
+                        for row in message.buttons:
+                            for button in row:
+                                if "Сохранить изменения" in button.text:
+                                    await button.click()
+                                    # print(f"Натиснуто кнопку: {button.text}")
+                                    await asyncio.sleep(0.5)
+            else:
+                # Если кнопка не найдена, выводим сообщение
+                print("Не знайдено подібне оголошення")
 
 
 async def main_loop():
@@ -173,12 +187,12 @@ async def main_loop():
             try:
                 # Робота з ботом через перший акаунт
                 # Перевірка валюти обраної маркету
-
+                print(f"Перевіряю актуальні ціни 🔎...")
                 await client_check.send_message('CryptoBot', '/p2p')
                 await asyncio.sleep(0.5)
 
                 await check_if_uah(client_check)  # Проверка/переключение валюты на UAH
-
+                print(f"Перевіряю актуальні ціни на UAH 🔎...")
                 await client_check.send_message('CryptoBot', '/p2p')
                 await asyncio.sleep(0.5)
 
@@ -189,7 +203,7 @@ async def main_loop():
                             for button in row:
                                 if button.text == "📉 Продать":
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Обираємо "Tether"
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -198,7 +212,7 @@ async def main_loop():
                             for button in row:
                                 if "Tether" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Обираємо "Monobank"
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -207,7 +221,7 @@ async def main_loop():
                             for button in row:
                                 if "Monobank" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Вказання суми
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -216,7 +230,7 @@ async def main_loop():
                             for button in row:
                                 if "Указать сумму" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
 
                 # Відправка суми в UAH
@@ -231,7 +245,7 @@ async def main_loop():
                             if sellers_found >= 2:
                                 break
                             for button in row:
-                                print(f"{button.text}")
+                                # print(f"{button.text}")
                                 if "₴" in button.text:
                                     match = re.search(r"([A-Za-z0-9_\s]+)\s*·\s*₴([0-9.]+)", button.text)
                                     if match:
@@ -239,18 +253,18 @@ async def main_loop():
                                             global top_nick_uah, top_price_uah
                                             top_nick_uah = match.group(1).strip()
                                             top_price_uah = float(match.group(2))
-                                            print(f"Перший продавець - Нікнейм: {top_nick_uah}, Ціна: {top_price_uah}")
+                                            print(f"Перший продавець UAH - Нікнейм: {top_nick_uah}, Ціна: {top_price_uah}")
                                         elif sellers_found == 1:
                                             global second_nick_uah, second_price_uah
                                             second_nick_uah = match.group(1).strip()
                                             second_price_uah = float(match.group(2))
-                                            print(f"Другий продавець - Нікнейм: {second_nick_uah}, Ціна: {second_price_uah}")
+                                            print(f"Другий продавець UAH - Нікнейм: {second_nick_uah}, Ціна: {second_price_uah}")
                                         sellers_found += 1
                                         if sellers_found >= 2:
                                             break
 
                 await check_if_kzt(client_check)  # Проверка/переключение валюты на KZT
-
+                print(f"Перевіряю актуальні ціни на KZT 🔎...")
                 await client_check.send_message('CryptoBot', '/p2p')
                 await asyncio.sleep(0.5)
 
@@ -261,7 +275,7 @@ async def main_loop():
                             for button in row:
                                 if button.text == "📉 Продать":
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Обираємо "Tether"
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -270,7 +284,7 @@ async def main_loop():
                             for button in row:
                                 if "Tether" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Обираємо "Kaspi Bank"
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -279,7 +293,7 @@ async def main_loop():
                             for button in row:
                                 if "Kaspi Bank" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
                 # Вказання суми
                 async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -288,7 +302,7 @@ async def main_loop():
                             for button in row:
                                 if "Указать сумму" in button.text:
                                     await button.click()
-                                    print(f"Натиснуто кнопку: {button.text}")
+                                    # print(f"Натиснуто кнопку: {button.text}")
                                     await asyncio.sleep(0.5)
 
                 # Відправка суми в KZT
@@ -303,7 +317,7 @@ async def main_loop():
                             if sellers_found >= 2:
                                 break
                             for button in row:
-                                print(f"{button.text}")
+                                # print(f"{button.text}")
                                 if "₸" in button.text:
                                     match = re.search(r"([A-Za-z0-9_\s]+)\s*·\s*₸([0-9.]+)", button.text)
                                     if match:
@@ -311,43 +325,43 @@ async def main_loop():
                                             global top_nick_kzt, top_price_kzt
                                             top_nick_kzt = match.group(1).strip()
                                             top_price_kzt = float(match.group(2))
-                                            print(f"Перший продавець - Нікнейм: {top_nick_kzt}, Ціна: {top_price_kzt}")
+                                            print(f"Перший продавець KZT - Нікнейм: {top_nick_kzt}, Ціна: {top_price_kzt}")
                                         elif sellers_found == 1:
                                             global second_nick_kzt, second_price_kzt
                                             second_nick_uah = match.group(1).strip()
                                             second_price_kzt = float(match.group(2))
-                                            print(f"Другий продавець - Нікнейм: {second_nick_kzt}, Ціна: {second_price_kzt}")
+                                            print(f"Другий продавець KZT - Нікнейм: {second_nick_kzt}, Ціна: {second_price_kzt}")
                                         sellers_found += 1
                                         if sellers_found >= 2:
                                             break
 
                 # Проверка условий для изменения цены для UAH
                 if top_nick_uah == your_nick:
-                    print(f"Ви на першій позиції по UAH")
+                    print(f"Ви на першій позиції по UAH 🥇")
                     # Проверяем, не слишком ли большая разница с вторым местом
                     if second_price_uah and (top_price_uah - second_price_uah) > 0.05:
-                        print(f"Різниця з другим місцем по UAH завелика ({top_price_uah - second_price_uah}), змінюємо ціну")
+                        print(f"Різниця з другим місцем по UAH завелика ({top_price_uah - second_price_uah}), змінюємо ціну ✏️")
                         new_price_uah = second_price_uah + 0.01
                         await update_price_uah(client_main, new_price_uah)
                     else:
-                        print("Різниця з другим місцем по UAH в нормі")
+                        print("Різниця з другим місцем по UAH в нормі 👍")
                 else:
-                    print(f"Ви не на першій позиції по UAH, змінюємо ціну")
+                    print(f"Ви не на першій позиції по UAH, змінюємо ціну ✏️")
                     new_price_uah = top_price_uah + 0.01
                     await update_price_uah(client_main, new_price_uah)
 
                 # Проверка условий для изменения цены для KZT
                 if top_nick_kzt == your_nick:
-                    print(f"Ви на першій позиції по KZT")
+                    print(f"Ви на першій позиції по KZT 🥇")
                     # Проверяем, не слишком ли большая разница с вторым местом
                     if second_price_kzt and (top_price_kzt - second_price_kzt) > 0.05:
-                        print(f"Різниця з другим місцем по KZT завелика ({top_price_kzt - second_price_kzt}), змінюємо ціну")
+                        print(f"Різниця з другим місцем по KZT завелика ({top_price_kzt - second_price_kzt}), змінюємо ціну ✏️")
                         new_price_kzt = second_price_kzt + 0.01
                         await update_price_kzt(client_main, new_price_kzt)
                     else:
-                        print("Різниця з другим місцем по KZT в нормі")
+                        print("Різниця з другим місцем по KZT в нормі 👍")
                 else:
-                    print(f"Ви не на першій позиції по KZT, змінюємо ціну")
+                    print(f"Ви не на першій позиції по KZT, змінюємо ціну ✏️")
                     new_price_kzt = top_price_kzt + 0.01
                     await update_price_kzt(client_main, new_price_kzt)
 
@@ -378,7 +392,7 @@ async def check_if_uah(client_check):  # Проверяет валюту на UA
                 for button in row:
                     if "Оплата и валюта" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -396,7 +410,7 @@ async def check_if_uah(client_check):  # Проверяет валюту на UA
                 for button in row:
                     if "Валюта P2P Маркета" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -405,7 +419,7 @@ async def check_if_uah(client_check):  # Проверяет валюту на UA
                 for button in row:
                     if "UAH" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
 
@@ -420,7 +434,7 @@ async def check_if_kzt(client_check):  # Проверяет валюту на KZ
                 for button in row:
                     if "Оплата и валюта" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -438,7 +452,7 @@ async def check_if_kzt(client_check):  # Проверяет валюту на KZ
                 for button in row:
                     if "Валюта P2P Маркета" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
     async for message in client_check.iter_messages('CryptoBot', limit=1):
@@ -447,8 +461,11 @@ async def check_if_kzt(client_check):  # Проверяет валюту на KZ
                 for button in row:
                     if "KZT" in button.text:
                         await button.click()
-                        print(f"Натиснуто кнопку: {button.text}")
+                        # print(f"Натиснуто кнопку: {button.text}")
                         await asyncio.sleep(0.5)
 
 if __name__ == '__main__':
-    asyncio.run(main_loop())
+    try:
+        asyncio.run(main_loop())
+    except KeyboardInterrupt:
+        print("Скрипт був зупинений користувачем.")

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6c83e7d-753b-4ae0-b254-5121f73ca405" name="Changes" comment="Add logic for downing price">
+    <list default="true" id="d6c83e7d-753b-4ae0-b254-5121f73ca405" name="Changes" comment="Add functional for KZT and random circle time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -139,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738536647940</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add functional for KZT and random circle time">
+      <option name="closed" value="true" />
+      <created>1739052446709</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739052446709</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -147,6 +155,7 @@
     <MESSAGE value="Wokrking script without repeats" />
     <MESSAGE value="Infinity circle" />
     <MESSAGE value="Add logic for downing price" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logic for downing price" />
+    <MESSAGE value="Add functional for KZT and random circle time" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add functional for KZT and random circle time" />
   </component>
 </project>
